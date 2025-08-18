@@ -11,8 +11,8 @@
     "nl": "Deze app laat je connectie maken met de Tuya cloud"
   },
   "category": "lights",
-  "version": "1.1.25",
-  "compatibility": ">=5.0.0",
+  "version": "1.1.26",
+  "compatibility": ">=12.0.0",
   "author": {
     "name": "Jurgen Heine",
     "email": "jurgen2.heine@gmail.com"
@@ -33,6 +33,9 @@
       },
       {
         "name": "Ronny Winkler"
+      },
+      {
+        "name": "Sebastiaan Tammer"
       }
     ]
   },
@@ -753,6 +756,90 @@
           }
         ],
         "id": "setTuyaScene"
+      },
+      {
+        "id": "set_poolheatpump_mode",
+        "title": {
+          "en": "Set pool heat pump mode"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=poolheatpump"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "bheat",
+                "title": {
+                  "en": "Boost Heat"
+                }
+              },
+              {
+                "id": "eheat",
+                "title": {
+                  "en": "Eco Heat"
+                }
+              },
+              {
+                "id": "sheat",
+                "title": {
+                  "en": "Silent Heat"
+                }
+              },
+              {
+                "id": "bcool",
+                "title": {
+                  "en": "Boost Cool"
+                }
+              },
+              {
+                "id": "ecool",
+                "title": {
+                  "en": "Eco Cool"
+                }
+              },
+              {
+                "id": "scool",
+                "title": {
+                  "en": "Silent Cool"
+                }
+              },
+              {
+                "id": "auto",
+                "title": {
+                  "en": "Auto"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_poolheatpump_target_temperature",
+        "title": {
+          "en": "Set pool heat pump target temperature"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=poolheatpump"
+          },
+          {
+            "name": "target_temperature",
+            "type": "number",
+            "title": {
+              "en": "Target temperature"
+            }
+          }
+        ]
       }
     ]
   },
@@ -1127,6 +1214,43 @@
       ],
       "deprecated": true,
       "id": "light"
+    },
+    {
+      "images": {
+        "large": "/drivers/poolheatpump/assets/images/large.png",
+        "small": "/drivers/poolheatpump/assets/images/small.png"
+      },
+      "icon": "/drivers/poolheatpump/assets/icon.svg",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "name": {
+        "en": "Pool heat pump"
+      },
+      "class": "heatpump",
+      "capabilities": [
+        "onoff",
+        "poolheatpump_mode",
+        "poolheatpump_target_temperature",
+        "measure_temperature"
+      ],
+      "id": "poolheatpump"
     },
     {
       "images": {
@@ -1905,6 +2029,78 @@
           }
         }
       ]
+    },
+    "poolheatpump_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Mode"
+      },
+      "desc": {
+        "en": "Pool heat pump operation mode"
+      },
+      "values": [
+        {
+          "id": "bheat",
+          "title": {
+            "en": "Boost Heat"
+          }
+        },
+        {
+          "id": "eheat",
+          "title": {
+            "en": "Eco Heat"
+          }
+        },
+        {
+          "id": "sheat",
+          "title": {
+            "en": "Silent Heat"
+          }
+        },
+        {
+          "id": "bcool",
+          "title": {
+            "en": "Boost Cool"
+          }
+        },
+        {
+          "id": "ecool",
+          "title": {
+            "en": "Eco Cool"
+          }
+        },
+        {
+          "id": "scool",
+          "title": {
+            "en": "Silent Cool"
+          }
+        },
+        {
+          "id": "auto",
+          "title": {
+            "en": "Auto"
+          }
+        }
+      ],
+      "getable": true,
+      "setable": true
+    },
+    "poolheatpump_target_temperature": {
+      "type": "number",
+      "title": {
+        "en": "Target temperature"
+      },
+      "uiComponent": "slider",
+      "getable": true,
+      "setable": true,
+      "units": {
+        "en": "°C"
+      },
+      "min": 8,
+      "max": 40,
+      "step": 1,
+      "decimals": 0,
+      "insights": true
     },
     "thermostat_heater_mode": {
       "type": "enum",

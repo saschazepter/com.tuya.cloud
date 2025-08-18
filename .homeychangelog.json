@@ -166,5 +166,8 @@
   },
   "1.1.25": {
     "en": "Added Temperature and Humidity Sensor & RGB Light type"
+  },
+  "1.1.26": {
+    "en": "heatpump added by Sebastiaan Tammer"
   }
 }
